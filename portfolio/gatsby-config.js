@@ -1,10 +1,5 @@
 const contentful = require('contentful');
 const manifestConfig = require('./manifest-config');
-const dotenv = require('dotenv');
-
-if (process.env.NODE_ENV !== 'production') {
-  dotenv.config();
-}
 require('dotenv').config();
 
 const { ACCESS_TOKEN, SPACE_ID, ANALYTICS_ID } = process.env;
@@ -32,8 +27,8 @@ const plugins = [
   {
     resolve: 'gatsby-source-contentful',
     options: {
-      spaceId: process.env.CONTENTFUL_SPACE_ID,
-      accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      spaceId: SPACE_ID,
+      accessToken: ACCESS_TOKEN,
     },
   },
   'gatsby-transformer-remark',
