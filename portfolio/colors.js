@@ -5,7 +5,8 @@ module.exports = {
 
   primary:
     '#000dff' /* color of "Hello..." text and card links; dark royal blue */,
-  primaryLight: '#23bff7' /* color of card links on hover text; aqua */,
+  primaryLight:
+    '#ff9769' /* color of card links on hover text; pastel orange */,
   primaryDark: '#3257fa' /* background color of sticky nav; royal blue */,
 
   secondary: '#05d1ff' /* color of upper, left-most triangle; twitter blue */,
