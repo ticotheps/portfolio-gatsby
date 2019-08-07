@@ -49,9 +49,11 @@ const Footer = () => (
             <Fade left>
               <TextFooter>
                 <span>{`${name}'s Portfolio - Powered by `}</span>
-                <Link href="https://www.gatsbyjs.org/">Gatsby</Link>
+                <Link href="https://www.gatsbyjs.org/" target="_blank">
+                  Gatsby
+                </Link>
                 <span> and </span>
-                <Link href="https://www.contentful.com/" mr={1}>
+                <Link href="https://www.contentful.com/" target="_blank" mr={1}>
                   Contentful
                 </Link>
                 <span role="img" aria-label="heart">
