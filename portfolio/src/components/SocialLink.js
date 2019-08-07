@@ -27,7 +27,7 @@ SocialLink.propTypes = {
   fontAwesomeIcon: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  alt: PropTypes.bool,
+  alt: PropTypes.string,
 };
 
 export default SocialLink;
