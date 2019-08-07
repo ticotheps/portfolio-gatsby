@@ -135,14 +135,14 @@ const Project = ({
           >
             <Box mx={1} fontSize={5}>
               <SocialLink
-                name="Check repository"
+                name="See This Project's GitHub Repo"
                 fontAwesomeIcon="github"
                 url={repositoryUrl}
               />
             </Box>
             <Box mx={1} fontSize={5}>
               <SocialLink
-                name="See project"
+                name="Try This Project Out!"
                 fontAwesomeIcon="play-circle"
                 url={projectUrl}
               />
