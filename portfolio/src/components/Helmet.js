@@ -43,7 +43,7 @@ const Helmet = ({ theme = {} }) => (
 
           <meta itemProp="name" content={title} />
           <meta itemProp="description" content={description} />
-          <meta itemProp="image" content={`https:${profile.favicon32.src}`} />
+          {/* <meta itemProp="image" content={`https:${profile.favicon32.src}`} /> */}
 
           <meta name="og:title" content={title} />
           <meta name="og:description" content={description} />
