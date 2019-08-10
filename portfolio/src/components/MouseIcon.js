@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 
 const MouseContainer = styled.svg`
-  max-width: 2.5rem;
+  max-width: 2rem;
   width: 100%;
   height: auto;
 `;

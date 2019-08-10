@@ -35,7 +35,7 @@ const StyledLink = styled.a`
 `;
 
 const MarkdownParagraph = styled.p`
-  line-height: 2em;
+  line-height: 1.75em;
 
   &:first-child {
     margin-top: 0em;
@@ -48,7 +48,7 @@ const MarkdownList = styled.ul`
 
 const MarkdownListItem = styled.li`
   margin: 1em 0;
-  line-height: 2em;
+  line-height: 1.5em;
 `;
 
 const MarkdownLink = ({ href, children }) => {
