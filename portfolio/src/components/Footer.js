@@ -49,7 +49,12 @@ const Footer = () => (
             <Flex>
               <Fade right>
                 {socialLinks.map(({ id, ...rest }) => (
-                  <Box mx={4} mb={5} fontSize={5} key={id}>
+                  <Box
+                    mx={[3, 4, 4, 4]}
+                    mb={(5, 2, 2, 2)}
+                    fontSize={5}
+                    key={id}
+                  >
                     <SocialLink {...rest} alt={'true'} />
                   </Box>
                 ))}
