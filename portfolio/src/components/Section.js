@@ -15,7 +15,7 @@ const SectionContainer = styled.div`
   flex: 0 1 auto;
   flex-direction: column;
   justify-content: center;
-  padding: 1em 1em;
+  padding: 0em 1em;
   scroll-behavior: smooth;
 `;
 
