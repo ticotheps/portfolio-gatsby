@@ -9,7 +9,7 @@ import Section from '../components/Section';
 import SocialLink from '../components/SocialLink';
 import MouseIcon from '../components/MouseIcon';
 import Triangle from '../components/Triangle';
-import photo from '../../media/icon.png';
+import tico from '../../media/tico-profile.jpg';
 
 const Background = () => (
   <div>
@@ -101,12 +101,18 @@ const LandingPage = () => (
                 style={{ maxWidth: '300px', margin: 'auto' }}
               >
                 <Fade right>
-                  <Image
-                    src={photo}
+                  {/* <Image
+                    src={tico}
                     sx={{
                       width: ['100%', '50%'],
                       borderRadius: 8,
                     }}
+                  /> */}
+                  <ProfilePicture
+                    src={tico}
+                    alt="Author"
+                    mt={[4, 4, 0]}
+                    ml={[0, 0, 1]}
                   />
                 </Fade>
               </Box>
