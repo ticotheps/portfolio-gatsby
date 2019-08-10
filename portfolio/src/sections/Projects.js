@@ -5,6 +5,8 @@ import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 import Section from '../components/Section';
+import { SectionLink } from 'react-scroll-section';
+import MouseIcon from '../components/MouseIcon';
 import { CardContainer, Card } from '../components/Card';
 import SocialLink from '../components/SocialLink';
 import Triangle from '../components/Triangle';
@@ -237,6 +239,9 @@ const Projects = () => (
         </CardContainer>
       )}
     />
+    <SectionLink section="blog">
+      {({ onClick }) => <MouseIcon onClick={onClick} />}
+    </SectionLink>
   </Section.Container>
 );
 
