@@ -7,6 +7,7 @@ import Fade from 'react-reveal/Fade';
 import Section from '../components/Section';
 import Triangle from '../components/Triangle';
 import markdownRenderer from '../components/MarkdownRenderer';
+import family from '../../media/family.jpg';
 
 const Background = () => (
   <div>
@@ -82,8 +83,8 @@ const About = () => (
             >
               <Fade right>
                 <ProfilePicture
-                  src={profile.image.src}
-                  alt={profile.title}
+                  src={family}
+                  alt="Tico's family"
                   mt={[4, 4, 0]}
                   ml={[0, 0, 1]}
                 />
