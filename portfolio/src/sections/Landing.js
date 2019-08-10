@@ -46,6 +46,7 @@ const centerHorizontally = { marginRight: 'auto', marginLeft: 'auto' };
 
 const ProfilePicture = styled(Image)`
   border-radius: 50%;
+  margin: 0px auto 30px;
   border: 2px solid #009dff;
   transition: all 0.25s ease-out;
 
@@ -80,40 +81,20 @@ const LandingPage = () => (
               textAlign="center"
               as="h1"
               color="primary"
-              fontSize={[5, 6, 8]}
-              mb={[3, 4, 5]}
+              fontSize={[6, 6, 7, 8]}
+              mt={[6, 5, 4, 4]}
+              mb={[4, 3, 2, 3]}
             >
               {`Hello, I'm ${name}!`}
             </Heading>
 
-            {/* <Heading
-              textAlign="center"
-              as="h1"
-              color="primary"
-              fontSize={[5, 6, 8]}
-              mb={[3, 4, 5]}
-            >
-              {`Dude!`}
-            </Heading> */}
             <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
               <Box
                 width={[1, 1, 2 / 6]}
-                style={{ maxWidth: '300px', margin: 'auto' }}
+                style={{ maxWidth: '200px', margin: 'auto' }}
               >
                 <Fade right>
-                  {/* <Image
-                    src={tico}
-                    sx={{
-                      width: ['100%', '50%'],
-                      borderRadius: 8,
-                    }}
-                  /> */}
-                  <ProfilePicture
-                    src={tico}
-                    alt="Author"
-                    mt={[4, 4, 0]}
-                    ml={[0, 0, 1]}
-                  />
+                  <ProfilePicture src={tico} alt="Author" />
                 </Fade>
               </Box>
             </Flex>
@@ -121,8 +102,8 @@ const LandingPage = () => (
             <Heading
               as="h2"
               color="primary"
-              fontSize={[4, 5, 6]}
-              mb={[3, 5]}
+              fontSize={[5, 5, 6, 6]}
+              mb={[4, 4, 3, 3]}
               textAlign="center"
               style={centerHorizontally}
             >
@@ -139,7 +120,13 @@ const LandingPage = () => (
 
             <Flex alignItems="center" justifyContent="center" flexWrap="wrap">
               {socialLinks.map(({ id, ...rest }) => (
-                <Box mx={3} fontSize={[5, 6, 6]} key={id}>
+                <Box
+                  mx={3}
+                  mb={4}
+                  mt={[2, 0, 0, 0]}
+                  fontSize={[5, 5, 6, 6]}
+                  key={id}
+                >
                   <SocialLink {...rest} />
                 </Box>
               ))}
