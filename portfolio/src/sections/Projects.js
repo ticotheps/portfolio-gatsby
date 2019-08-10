@@ -5,6 +5,8 @@ import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 import Section from '../components/Section';
+import { SectionLink } from 'react-scroll-section';
+import MouseIcon from '../components/MouseIcon';
 import { CardContainer, Card } from '../components/Card';
 import SocialLink from '../components/SocialLink';
 import Triangle from '../components/Triangle';
@@ -49,7 +51,7 @@ const CARD_HEIGHT = '200px';
 const MEDIA_QUERY_SMALL = '@media (max-width: 400px)';
 
 const Title = styled(Text)`
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
   display: table;
@@ -59,6 +61,7 @@ const Title = styled(Text)`
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
+  font-size: 13px;
   padding: 10px;
   width: 100%;
   width: calc(100% - ${CARD_HEIGHT});
@@ -80,7 +83,7 @@ const ImageContainer = styled.div`
 const ProjectImage = styled(Image)`
   width: ${CARD_HEIGHT};
   height: ${CARD_HEIGHT};
-  padding: 40px;
+  padding: 10px;
   margin-top: 0px;
 
   ${MEDIA_QUERY_SMALL} {
@@ -128,34 +131,34 @@ const Project = ({
       <ImageContainer>
         <ProjectImage src={logo.image.src} alt={logo.title} />
         <ProjectTag>
-          <Flex
-            style={{
-              float: 'right',
-            }}
-          >
-            <Box mx={1} fontSize={5}>
-              <SocialLink
-                name="See the GitHub Repo"
-                fontAwesomeIcon="github"
-                url={repositoryUrl}
-              />
-            </Box>
-            <Box mx={1} fontSize={5}>
-              <SocialLink
-                name="Try it out!"
-                fontAwesomeIcon="play-circle"
-                url={projectUrl}
-              />
-            </Box>
-          </Flex>
           <ImageSubtitle
-            bg="primaryLight"
+            bg="backgroundDark"
             color="white"
             y="bottom"
             x="right"
             round
           >
-            {type}
+            {/* {type} */}
+            <Flex
+              style={{
+                float: 'right',
+              }}
+            >
+              <Box mx={1} fontSize={5}>
+                <SocialLink
+                  name="See the GitHub Repo"
+                  fontAwesomeIcon="github"
+                  url={repositoryUrl}
+                />
+              </Box>
+              <Box mx={1} fontSize={5}>
+                <SocialLink
+                  name="Try it out!"
+                  fontAwesomeIcon="play-circle"
+                  url={projectUrl}
+                />
+              </Box>
+            </Flex>
           </ImageSubtitle>
           <Hide query={MEDIA_QUERY_SMALL}>
             <ImageSubtitle bg="backgroundDark">{publishedDate}</ImageSubtitle>
@@ -216,6 +219,9 @@ const Projects = () => (
         </CardContainer>
       )}
     />
+    <SectionLink section="blog">
+      {({ onClick }) => <MouseIcon onClick={onClick} />}
+    </SectionLink>
   </Section.Container>
 );
 

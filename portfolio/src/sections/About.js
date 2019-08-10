@@ -5,8 +5,11 @@ import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import Fade from 'react-reveal/Fade';
 import Section from '../components/Section';
+import { SectionLink } from 'react-scroll-section';
+import MouseIcon from '../components/MouseIcon';
 import Triangle from '../components/Triangle';
 import markdownRenderer from '../components/MarkdownRenderer';
+import family from '../../media/family.jpg';
 
 const Background = () => (
   <div>
@@ -56,7 +59,7 @@ const About = () => (
             }
             profile {
               title
-              image: resize(width: 450, quality: 100) {
+              image: resize(width: 500, quality: 100) {
                 src
               }
             }
@@ -67,7 +70,7 @@ const About = () => (
         const { aboutMe, profile } = data.contentfulAbout;
         return (
           <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
-            <Box width={[1, 1, 4 / 6]} px={[1, 2, 4]}>
+            <Box width={[1, 1, 4 / 10]} px={[1, 2, 3, 3]}>
               <Fade bottom>
                 <ReactMarkdown
                   source={aboutMe.childMarkdownRemark.rawMarkdownBody}
@@ -78,17 +81,21 @@ const About = () => (
 
             <Box
               width={[1, 1, 2 / 6]}
-              style={{ maxWidth: '300px', margin: 'auto' }}
+              style={{ maxWidth: '400px', margin: 'auto' }}
             >
               <Fade right>
                 <ProfilePicture
-                  src={profile.image.src}
-                  alt={profile.title}
-                  mt={[4, 4, 0]}
+                  src={family}
+                  alt="Tico's family"
+                  mt={[4, 4, 0, 0]}
+                  mb={[5, 0, 0, 0]}
                   ml={[0, 0, 1]}
                 />
               </Fade>
             </Box>
+            <SectionLink section="projects">
+              {({ onClick }) => <MouseIcon onClick={onClick} />}
+            </SectionLink>
           </Flex>
         );
       }}

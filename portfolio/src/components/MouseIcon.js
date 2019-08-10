@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 
 const MouseContainer = styled.svg`
-  max-width: 2.5rem;
+  max-width: 2rem;
   width: 100%;
   height: auto;
 `;
@@ -15,7 +15,7 @@ const ScrollLink = styled.span`
   transform: translateX(-50%);
   cursor: pointer;
 
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 1000px) {
     display: none;
   }
 `;

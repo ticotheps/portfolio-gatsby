@@ -1,12 +1,15 @@
 import React, { Fragment } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
-import { Heading, Flex, Box, Text } from 'rebass';
+import styled from 'styled-components';
+import { Heading, Flex, Box, Image, Text } from 'rebass';
 import TextLoop from 'react-text-loop';
 import { SectionLink } from 'react-scroll-section';
+import Fade from 'react-reveal/Fade';
 import Section from '../components/Section';
 import SocialLink from '../components/SocialLink';
 import MouseIcon from '../components/MouseIcon';
 import Triangle from '../components/Triangle';
+import tico from '../../media/tico-profile.jpg';
 
 const Background = () => (
   <div>
@@ -41,6 +44,17 @@ const Background = () => (
 
 const centerHorizontally = { marginRight: 'auto', marginLeft: 'auto' };
 
+const ProfilePicture = styled(Image)`
+  border-radius: 50%;
+  margin: 0px auto 30px;
+  border: 2px solid #009dff;
+  transition: all 0.25s ease-out;
+
+  &:hover {
+    border-radius: 20%;
+  }
+`;
+
 const LandingPage = () => (
   <Section.Container id="home" Background={Background}>
     <StaticQuery
@@ -67,17 +81,29 @@ const LandingPage = () => (
               textAlign="center"
               as="h1"
               color="primary"
-              fontSize={[5, 6, 8]}
-              mb={[3, 4, 5]}
+              fontSize={[6, 6, 7, 8]}
+              mt={[6, 5, 4, 4]}
+              mb={[4, 3, 2, 3]}
             >
               {`Hello, I'm ${name}!`}
             </Heading>
 
+            <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
+              <Box
+                width={[1, 1, 2 / 6]}
+                style={{ maxWidth: '200px', margin: 'auto' }}
+              >
+                <Fade right>
+                  <ProfilePicture src={tico} alt="Author" />
+                </Fade>
+              </Box>
+            </Flex>
+
             <Heading
               as="h2"
               color="primary"
-              fontSize={[4, 5, 6]}
-              mb={[3, 5]}
+              fontSize={[5, 5, 6, 6]}
+              mb={[4, 4, 3, 3]}
               textAlign="center"
               style={centerHorizontally}
             >
@@ -94,7 +120,7 @@ const LandingPage = () => (
 
             <Flex alignItems="center" justifyContent="center" flexWrap="wrap">
               {socialLinks.map(({ id, ...rest }) => (
-                <Box mx={3} fontSize={[5, 6, 6]} key={id}>
+                <Box mx={3} mb={4} mt={[2, 0, 0, 0]} fontSize={5} key={id}>
                   <SocialLink {...rest} />
                 </Box>
               ))}
