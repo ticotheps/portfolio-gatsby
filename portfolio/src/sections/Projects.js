@@ -46,7 +46,7 @@ const Background = () => (
   </div>
 );
 
-const CARD_HEIGHT = '225px';
+const CARD_HEIGHT = '200px';
 
 const MEDIA_QUERY_SMALL = '@media (max-width: 400px)';
 
@@ -83,7 +83,7 @@ const ImageContainer = styled.div`
 const ProjectImage = styled(Image)`
   width: ${CARD_HEIGHT};
   height: ${CARD_HEIGHT};
-  padding: 20px;
+  padding: 10px;
   margin-top: 0px;
 
   ${MEDIA_QUERY_SMALL} {
@@ -144,14 +144,14 @@ const Project = ({
                 float: 'right',
               }}
             >
-              <Box mx={1} fontSize={4}>
+              <Box mx={1} fontSize={5}>
                 <SocialLink
                   name="See the GitHub Repo"
                   fontAwesomeIcon="github"
                   url={repositoryUrl}
                 />
               </Box>
-              <Box mx={1} fontSize={4}>
+              <Box mx={1} fontSize={5}>
                 <SocialLink
                   name="Try it out!"
                   fontAwesomeIcon="play-circle"
