@@ -59,7 +59,7 @@ const About = () => (
             }
             profile {
               title
-              image: resize(width: 450, quality: 100) {
+              image: resize(width: 500, quality: 100) {
                 src
               }
             }
@@ -70,7 +70,7 @@ const About = () => (
         const { aboutMe, profile } = data.contentfulAbout;
         return (
           <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
-            <Box width={[1, 1, 4 / 6]} px={[1, 2, 3, 3]}>
+            <Box width={[1, 1, 4 / 10]} px={[1, 2, 3, 3]}>
               <Fade bottom>
                 <ReactMarkdown
                   source={aboutMe.childMarkdownRemark.rawMarkdownBody}
@@ -81,13 +81,14 @@ const About = () => (
 
             <Box
               width={[1, 1, 2 / 6]}
-              style={{ maxWidth: '300px', margin: 'auto' }}
+              style={{ maxWidth: '400px', margin: 'auto' }}
             >
               <Fade right>
                 <ProfilePicture
                   src={family}
                   alt="Tico's family"
-                  mt={[4, 4, 0]}
+                  mt={[4, 4, 0, 0]}
+                  mb={[5, 0, 0, 0]}
                   ml={[0, 0, 1]}
                 />
               </Fade>

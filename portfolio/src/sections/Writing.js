@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Heading, Text, Flex, Box } from 'rebass';
+import { Heading, Text, Flex, Box, Link } from 'rebass';
 import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
@@ -59,7 +59,7 @@ const Post = ({ title, text, image, url, date, time }) => (
       {title}
     </EllipsisHeading>
     {image && <CoverImage src={image} height="200px" alt={title} />}
-    <Text m={3}>{text}</Text>
+    <Text m={5}>{text}</Text>
     <ImageSubtitle bg="primaryLight" color="white" x="right" y="bottom" round>
       {`${date} - ${Math.ceil(time)} min`}
     </ImageSubtitle>
@@ -183,7 +183,7 @@ const Writing = () => (
         isMediumUserDefined && (
           <Section.Container id="blog" Background={Background}>
             <Section.Header name="My Blog" icon="🤔💭" label="writing" />
-            <CardContainer minWidth="300px">
+            <CardContainer minWidth="200px">
               {posts.map(({ Component, ...rest }) => (
                 <Fade bottom key={rest.id}>
                   <Component {...rest} />
