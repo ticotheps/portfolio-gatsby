@@ -10,7 +10,7 @@ const FooterContainer = styled.footer`
   max-width: 1366px;
   display: flex;
   flex: 0 1 auto;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   margin: auto;
@@ -44,8 +44,17 @@ const Footer = () => (
       const { name, socialLinks } = data.contentfulAbout;
 
       return (
-        <Box p={3} mt={0} backgroundColor="primaryDark">
+        <Box p={4} mt={0} backgroundColor="primaryDark">
           <FooterContainer>
+            <Flex>
+              <Fade right>
+                {socialLinks.map(({ id, ...rest }) => (
+                  <Box mx={4} mb={5} fontSize={5} key={id}>
+                    <SocialLink {...rest} alt={'true'} />
+                  </Box>
+                ))}
+              </Fade>
+            </Flex>
             <Fade left>
               <TextFooter>
                 <span>{`${name}'s Portfolio - Powered by `}</span>
@@ -61,15 +70,6 @@ const Footer = () => (
                 </span>
               </TextFooter>
             </Fade>
-            <Flex>
-              <Fade right>
-                {socialLinks.map(({ id, ...rest }) => (
-                  <Box mx={2} fontSize={4} key={id}>
-                    <SocialLink {...rest} alt={'true'} />
-                  </Box>
-                ))}
-              </Fade>
-            </Flex>
           </FooterContainer>
         </Box>
       );
