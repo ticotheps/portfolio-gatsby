@@ -70,7 +70,7 @@ const About = () => (
         const { aboutMe, profile } = data.contentfulAbout;
         return (
           <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
-            <Box width={[1, 1, 4 / 6]} px={[3, 4, 5, 5]}>
+            <Box width={[1, 1, 4 / 6]} px={[1, 2, 3, 3]}>
               <Fade bottom>
                 <ReactMarkdown
                   source={aboutMe.childMarkdownRemark.rawMarkdownBody}
