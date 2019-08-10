@@ -51,7 +51,7 @@ const CARD_HEIGHT = '225px';
 const MEDIA_QUERY_SMALL = '@media (max-width: 400px)';
 
 const Title = styled(Text)`
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
   display: table;
@@ -61,7 +61,7 @@ const Title = styled(Text)`
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 12px;
+  font-size: 13px;
   padding: 10px;
   width: 100%;
   width: calc(100% - ${CARD_HEIGHT});
@@ -83,7 +83,7 @@ const ImageContainer = styled.div`
 const ProjectImage = styled(Image)`
   width: ${CARD_HEIGHT};
   height: ${CARD_HEIGHT};
-  padding: 10px;
+  padding: 20px;
   margin-top: 0px;
 
   ${MEDIA_QUERY_SMALL} {
@@ -131,26 +131,6 @@ const Project = ({
       <ImageContainer>
         <ProjectImage src={logo.image.src} alt={logo.title} />
         <ProjectTag>
-          {/* <Flex
-            style={{
-              float: 'right',
-            }}
-          >
-            <Box mx={1} fontSize={5}>
-              <SocialLink
-                name="See the GitHub Repo"
-                fontAwesomeIcon="github"
-                url={repositoryUrl}
-              />
-            </Box>
-            <Box mx={1} fontSize={5}>
-              <SocialLink
-                name="Try it out!"
-                fontAwesomeIcon="play-circle"
-                url={projectUrl}
-              />
-            </Box>
-          </Flex> */}
           <ImageSubtitle
             bg="backgroundDark"
             color="white"
