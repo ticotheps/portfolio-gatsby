@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import Fade from 'react-reveal/Fade';
 import Section from '../components/Section';
+import { SectionLink } from 'react-scroll-section';
+import MouseIcon from '../components/MouseIcon';
 import Triangle from '../components/Triangle';
 import markdownRenderer from '../components/MarkdownRenderer';
 import family from '../../media/family.jpg';
@@ -90,6 +92,9 @@ const About = () => (
                 />
               </Fade>
             </Box>
+            <SectionLink section="projects">
+              {({ onClick }) => <MouseIcon onClick={onClick} />}
+            </SectionLink>
           </Flex>
         );
       }}
