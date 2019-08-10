@@ -51,7 +51,7 @@ const Footer = () => (
                 {socialLinks.map(({ id, ...rest }) => (
                   <Box
                     mx={[3, 4, 4, 4]}
-                    mb={(5, 2, 2, 2)}
+                    mb={[5, 4, 3, 3]}
                     fontSize={5}
                     key={id}
                   >
