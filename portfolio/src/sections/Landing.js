@@ -33,7 +33,7 @@ const Background = () => (
     />
 
     <Triangle
-      color="backgroundDark"
+      color="secondaryLight"
       height={['20vh', '20vh']}
       width={['100vw', '100vw']}
       invertX
@@ -47,7 +47,7 @@ const centerHorizontally = { marginRight: 'auto', marginLeft: 'auto' };
 const ProfilePicture = styled(Image)`
   border-radius: 50%;
   margin: 0px auto 30px;
-  border: 2px solid #009dff;
+  border: 2px solid #21ffb9;
   transition: all 0.25s ease-out;
 
   &:hover {
@@ -81,7 +81,7 @@ const LandingPage = () => (
               textAlign="center"
               as="h1"
               color="primary"
-              fontSize={[6, 6, 7, 8]}
+              fontSize={[5, 6, 7, 8]}
               mt={[6, 5, 4, 4]}
               mb={[4, 3, 2, 3]}
             >
@@ -102,8 +102,9 @@ const LandingPage = () => (
             <Heading
               as="h2"
               color="primary"
-              fontSize={[5, 5, 6, 6]}
-              mb={[4, 4, 3, 3]}
+              fontSize={[4, 5, 6, 6]}
+              mt={[3, 3, 2, 2]}
+              mb={[5, 5, 4, 4]}
               textAlign="center"
               style={centerHorizontally}
             >

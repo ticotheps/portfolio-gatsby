@@ -50,17 +50,23 @@ const EllipsisHeading = styled(Heading)`
   display: -webkit-inline-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  border-bottom: ${props => props.theme.colors.primary} 5px solid;
+  border-bottom: 5px solid #21ffb9;
 `;
 
 const Post = ({ title, text, image, url, date, time }) => (
-  <Card onClick={() => window.open(url, '_blank')} pb={4}>
-    <EllipsisHeading m={3} p={1}>
+  <Card onClick={() => window.open(url, '_blank')} pb={5}>
+    <EllipsisHeading m={3} p={4}>
       {title}
     </EllipsisHeading>
     {image && <CoverImage src={image} height="200px" alt={title} />}
-    <Text m={5}>{text}</Text>
-    <ImageSubtitle bg="primaryLight" color="white" x="right" y="bottom" round>
+    <Text m={3}>{text}</Text>
+    <ImageSubtitle
+      bg="secondaryLight"
+      color="secondaryDark"
+      x="right"
+      y="bottom"
+      round
+    >
       {`${date} - ${Math.ceil(time)} min`}
     </ImageSubtitle>
   </Card>
@@ -183,7 +189,7 @@ const Writing = () => (
         isMediumUserDefined && (
           <Section.Container id="blog" Background={Background}>
             <Section.Header name="My Blog" icon="🤔💭" label="writing" />
-            <CardContainer minWidth="200px">
+            <CardContainer minWidth="300px">
               {posts.map(({ Component, ...rest }) => (
                 <Fade bottom key={rest.id}>
                   <Component {...rest} />

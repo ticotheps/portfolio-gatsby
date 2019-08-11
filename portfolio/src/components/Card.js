@@ -17,7 +17,8 @@ export const CardContainer = styled.div`
 `;
 
 export const Card = styled(CardRebass).attrs({
-  bg: 'white',
+  bg: 'primaryLight',
+  color: '#FFFFFF',
   boxShadow: 0,
   borderRadius: 8,
 })`

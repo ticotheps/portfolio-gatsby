@@ -14,7 +14,7 @@ import family from '../../media/family.jpg';
 const Background = () => (
   <div>
     <Triangle
-      color="secondaryLight"
+      color="backgroundDark"
       height={['50vh', '20vh']}
       width={['50vw', '50vw']}
       invertY
@@ -37,7 +37,7 @@ const Background = () => (
 
 const ProfilePicture = styled(Image)`
   border-radius: 50%;
-  border: 2px solid #009dff;
+  border: 2px solid #7c00e7;
   transition: all 0.25s ease-out;
 
   &:hover {

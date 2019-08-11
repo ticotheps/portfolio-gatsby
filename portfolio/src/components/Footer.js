@@ -17,10 +17,14 @@ const FooterContainer = styled.footer`
 `;
 
 const TextFooter = styled(Text)`
-  color: ${props => props.theme.colors.background};
+  color: #7c00e7;
 
   & a {
-    color: ${props => props.theme.colors.background};
+    color: #ffffff;
+  }
+
+  a:hover {
+    color: #7c00e7;
   }
 `;
 
@@ -44,7 +48,7 @@ const Footer = () => (
       const { name, socialLinks } = data.contentfulAbout;
 
       return (
-        <Box p={4} mt={0} backgroundColor="primaryDark">
+        <Box p={4} mt={0} backgroundColor="secondaryLight">
           <FooterContainer>
             <Flex>
               <Fade right>

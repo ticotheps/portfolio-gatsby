@@ -16,7 +16,7 @@ import Hide from '../components/Hide';
 const Background = () => (
   <div>
     <Triangle
-      color="secondaryLight"
+      color="backgroundDark"
       height={['80vh', '80vh']}
       width={['100vw', '100vw']}
       invertX
@@ -51,11 +51,11 @@ const CARD_HEIGHT = '200px';
 const MEDIA_QUERY_SMALL = '@media (max-width: 400px)';
 
 const Title = styled(Text)`
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
   display: table;
-  border-bottom: ${props => props.theme.colors.primary} 5px solid;
+  border-bottom: 3px solid #21ffb9;
 `;
 
 const TextContainer = styled.div`
@@ -83,7 +83,7 @@ const ImageContainer = styled.div`
 const ProjectImage = styled(Image)`
   width: ${CARD_HEIGHT};
   height: ${CARD_HEIGHT};
-  padding: 10px;
+  padding: 20px;
   margin-top: 0px;
 
   ${MEDIA_QUERY_SMALL} {
@@ -132,8 +132,8 @@ const Project = ({
         <ProjectImage src={logo.image.src} alt={logo.title} />
         <ProjectTag>
           <ImageSubtitle
-            bg="backgroundDark"
-            color="white"
+            bg="#21ffb9"
+            // color="primaryLight"
             y="bottom"
             x="right"
             round
@@ -161,7 +161,9 @@ const Project = ({
             </Flex>
           </ImageSubtitle>
           <Hide query={MEDIA_QUERY_SMALL}>
-            <ImageSubtitle bg="backgroundDark">{publishedDate}</ImageSubtitle>
+            {/* <ImageSubtitle bg="#ff5c5c" color="#5cff88">
+              {publishedDate}
+            </ImageSubtitle> */}
           </Hide>
         </ProjectTag>
       </ImageContainer>
