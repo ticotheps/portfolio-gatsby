@@ -66,17 +66,7 @@ const Footer = () => (
             </Flex>
             <Fade left>
               <TextFooter>
-                <span>{`${name}'s Portfolio - Powered by `}</span>
-                <Link href="https://www.gatsbyjs.org/" target="_blank">
-                  Gatsby
-                </Link>
-                <span> and </span>
-                <Link href="https://www.contentful.com/" target="_blank" mr={1}>
-                  Contentful
-                </Link>
-                <span role="img" aria-label="heart">
-                  ❤️
-                </span>
+                <span>{`© 2019 Tico S. Thepsourinthone`}</span>
               </TextFooter>
             </Fade>
           </FooterContainer>
