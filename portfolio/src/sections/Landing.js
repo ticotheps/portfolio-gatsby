@@ -122,7 +122,7 @@ const LandingPage = () => (
             <Flex alignItems="center" justifyContent="center" flexWrap="wrap">
               {socialLinks.map(({ id, ...rest }) => (
                 <Box
-                  mx={3}
+                  mx={(4, 3, 3, 3)}
                   mb={4}
                   mt={[2, 0, 0, 0]}
                   fontSize={[5, 5, 6, 6]}
