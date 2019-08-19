@@ -125,7 +125,7 @@ const LandingPage = () => (
                   mx={(4, 3, 3, 3)}
                   mb={4}
                   mt={[2, 0, 0, 0]}
-                  fontSize={[5, 5, 6, 6]}
+                  fontSize={[4, 5, 6, 6]}
                   key={id}
                 >
                   <SocialLink {...rest} />
