@@ -28,8 +28,10 @@
   },
   "homepage": "https://github.com/EmaSuriano/gatsby-starter-mate#readme",
   "dependencies": {
+    "babel-plugin-styled-components": "^1.10.6",
     "contentful": "^7.0.3",
     "envfile": "^3.0.0",
+    "eslint-utils": "^1.4.1",
     "gatsby": "^2.3.27",
     "gatsby-plugin-google-analytics": "^2.0.18",
     "gatsby-plugin-google-fonts": "^0.0.4",
