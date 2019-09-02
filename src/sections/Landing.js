@@ -81,7 +81,6 @@ const SmileyPicture = styled(Image)`
 
   &:hover {
     opacity: 0;
-    cursor: grab;
   }
 `;
 
