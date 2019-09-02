@@ -1,3 +1,4 @@
+/* eslint-disable */
 const pleaseUpgradeNode = require('please-upgrade-node')
 const pkg = require('./package.json')
 
@@ -11,3 +12,4 @@ pleaseUpgradeNode(pkg, {
 
 // Node version is supported, continue
 require('./lib/installer/bin')
+
