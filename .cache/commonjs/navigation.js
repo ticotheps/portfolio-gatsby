@@ -37,7 +37,9 @@ function maybeRedirect(pathname) {
       const pageResources = _loader.default.loadPageSync(pathname);
 
       if (pageResources != null) {
-        console.error(`The route "${pathname}" matches both a page and a redirect; this is probably not intentional.`);
+        console.error(
+          `The route "${pathname}" matches both a page and a redirect; this is probably not intentional.`
+        );
       }
     }
 
@@ -75,9 +77,7 @@ const navigate = (to, options = {}) => {
     window.__navigatingToLink = true;
   }
 
-  let {
-    pathname
-  } = (0, _gatsbyLink.parsePath)(to);
+  let { pathname } = (0, _gatsbyLink.parsePath)(to);
   const redirect = redirectMap[pathname]; // If we're redirecting, just replace the passed in pathname
   // to the one we want to redirect to.
 
@@ -87,13 +87,11 @@ const navigate = (to, options = {}) => {
   } // If we had a service worker update, no matter the path, reload window and
   // reset the pathname whitelist
 
-
   if (window.___swUpdated) {
     window.location = pathname;
     return;
   } // Start a timer to wait for a second before transitioning and showing a
   // loader in case resources aren't around yet.
-
 
   const timeoutId = setTimeout(() => {
     _emitter.default.emit(`onDelayedLoadPageResources`, {
@@ -106,12 +104,29 @@ const navigate = (to, options = {}) => {
   }, 1000);
 
   _loader.default.loadPage(pathname).then(pageResources => {
-    // If the loaded page has a different compilation hash to the
+    // If no page resources, then refresh the page
+    // Do this, rather than simply `window.location.reload()`, so that
+    // pressing the back/forward buttons work - otherwise when pressing
+    // back, the browser will just change the URL and expect JS to handle
+    // the change, which won't always work since it might not be a Gatsby
+    // page.
+    if (!pageResources || pageResources.status === `error`) {
+      window.history.replaceState({}, ``, location.href);
+      window.location = pathname;
+    } // If the loaded page has a different compilation hash to the
     // window, then a rebuild has occurred on the server. Reload.
+
     if (process.env.NODE_ENV === `production` && pageResources) {
-      if (pageResources.page.webpackCompilationHash !== window.___webpackCompilationHash) {
+      if (
+        pageResources.page.webpackCompilationHash !==
+        window.___webpackCompilationHash
+      ) {
         // Purge plugin-offline cache
-        if (`serviceWorker` in navigator && navigator.serviceWorker.controller !== null && navigator.serviceWorker.controller.state === `activated`) {
+        if (
+          `serviceWorker` in navigator &&
+          navigator.serviceWorker.controller !== null &&
+          navigator.serviceWorker.controller.state === `activated`
+        ) {
           navigator.serviceWorker.controller.postMessage({
             gatsbyApi: `resetWhitelist`
           });
@@ -127,13 +142,8 @@ const navigate = (to, options = {}) => {
   });
 };
 
-function shouldUpdateScroll(prevRouterProps, {
-  location
-}) {
-  const {
-    pathname,
-    hash
-  } = location;
+function shouldUpdateScroll(prevRouterProps, { location }) {
+  const { pathname, hash } = location;
   const results = (0, _apiRunnerBrowser.apiRunner)(`shouldUpdateScroll`, {
     prevRouterProps,
     // `pathname` for backwards compatibility
@@ -145,14 +155,14 @@ function shouldUpdateScroll(prevRouterProps, {
   });
 
   if (results.length > 0) {
-    return results[0];
+    // Use the latest registered shouldUpdateScroll result, this allows users to override plugin's configuration
+    // @see https://github.com/gatsbyjs/gatsby/issues/12038
+    return results[results.length - 1];
   }
 
   if (prevRouterProps) {
     const {
-      location: {
-        pathname: oldPathname
-      }
+      location: { pathname: oldPathname }
     } = prevRouterProps;
 
     if (oldPathname === pathname) {
@@ -168,22 +178,21 @@ function shouldUpdateScroll(prevRouterProps, {
 function init() {
   // Temp hack while awaiting https://github.com/reach/router/issues/119
   window.__navigatingToLink = false;
-  window.___loader = _loader.default;
 
-  window.___push = to => navigate(to, {
-    replace: false
-  });
+  window.___push = to =>
+    navigate(to, {
+      replace: false
+    });
 
-  window.___replace = to => navigate(to, {
-    replace: true
-  });
+  window.___replace = to =>
+    navigate(to, {
+      replace: true
+    });
 
   window.___navigate = (to, options) => navigate(to, options); // Check for initial page-load redirect
 
-
   maybeRedirect(window.location.pathname);
 } // Fire on(Pre)RouteUpdate APIs
-
 
 class RouteUpdates extends _react.default.Component {
   constructor(props) {
@@ -213,7 +222,6 @@ class RouteUpdates extends _react.default.Component {
   render() {
     return this.props.children;
   }
-
 }
 
 exports.RouteUpdates = RouteUpdates;
