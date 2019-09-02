@@ -30,6 +30,7 @@
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.6",
     "contentful": "^7.0.3",
+    "core-js": "3",
     "envfile": "^3.0.0",
     "eslint-utils": "^1.4.1",
     "gatsby": "^2.3.27",
