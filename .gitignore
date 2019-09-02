@@ -1,5 +1,7 @@
+# Sensitive Info
 .env
 .vscode/
+
 packages/*/yarn.lock
 packages/*/package-lock.json
 
