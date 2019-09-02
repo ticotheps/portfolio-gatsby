@@ -43,34 +43,22 @@ window.___emitter = _emitter.default;
    * Let's warn if we find service workers in development.
    */
 
+
   if (`serviceWorker` in navigator) {
     navigator.serviceWorker.getRegistrations().then(registrations => {
-      if (registrations.length > 0)
-        console.warn(
-          `Warning: found one or more service workers present.`,
-          `If your site isn't behaving as expected, you might want to remove these.`,
-          registrations
-        );
+      if (registrations.length > 0) console.warn(`Warning: found one or more service workers present.`, `If your site isn't behaving as expected, you might want to remove these.`, registrations);
     });
   }
 
   const rootElement = document.getElementById(`___gatsby`);
-  const renderer = (0, _apiRunnerBrowser.apiRunner)(
-    `replaceHydrateFunction`,
-    undefined,
-    _reactDom.default.render
-  )[0];
+  const renderer = (0, _apiRunnerBrowser.apiRunner)(`replaceHydrateFunction`, undefined, _reactDom.default.render)[0];
 
   _loader.default.addDevRequires(_syncRequires.default);
 
   _loader.default.addMatchPaths(_matchPaths.default);
 
-  Promise.all([
-    _loader.default.loadPage(`/dev-404-page/`),
-    _loader.default.loadPage(`/404.html`),
-    _loader.default.loadPage(window.location.pathname)
-  ]).then(() => {
-    const preferDefault = m => (m && m.default) || m;
+  Promise.all([_loader.default.loadPage(`/dev-404-page/`), _loader.default.loadPage(`/404.html`), _loader.default.loadPage(window.location.pathname)]).then(() => {
+    const preferDefault = m => m && m.default || m;
 
     let Root = preferDefault(require(`./root`));
     (0, _domready.default)(() => {

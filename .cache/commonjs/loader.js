@@ -11,13 +11,11 @@ var _prefetch = _interopRequireDefault(require("./prefetch"));
 
 var _utils = require("@reach/router/lib/utils");
 
-var _normalizePagePath = _interopRequireDefault(
-  require("./normalize-page-path")
-);
+var _normalizePagePath = _interopRequireDefault(require("./normalize-page-path"));
 
 var _stripPrefix = _interopRequireDefault(require("./strip-prefix"));
 
-const preferDefault = m => (m && m.default) || m;
+const preferDefault = m => m && m.default || m;
 
 const pageNotFoundPaths = new Set();
 let apiRunner;
@@ -34,11 +32,15 @@ if (process.env.NODE_ENV !== `production`) {
   devGetPageData = require(`./socketIo`).getPageData;
 } // Cache for `cleanAndFindPath()`. In case `match-paths.json` is large
 
+
 const cleanAndFindPathCache = {};
 
 const findMatchPath = trimmedPathname => {
   for (const _ref of matchPaths) {
-    const { matchPath, path } = _ref;
+    const {
+      matchPath,
+      path
+    } = _ref;
 
     if ((0, _utils.match)(matchPath, trimmedPathname)) {
       return path;
@@ -55,23 +57,19 @@ const findMatchPath = trimmedPathname => {
 // Or if `match-paths.json` contains `{ "/foo*": "/page1", ...}`, then
 // `/foo?bar=far` => `/page1`
 
+
 const cleanAndFindPath = rawPathname => {
   let pathname = decodeURIComponent(rawPathname); // Remove the pathPrefix from the pathname.
 
   let trimmedPathname = (0, _stripPrefix.default)(pathname, __BASE_PATH__); // Remove any hashfragment
 
   if (trimmedPathname.split(`#`).length > 1) {
-    trimmedPathname = trimmedPathname
-      .split(`#`)
-      .slice(0, -1)
-      .join(``);
+    trimmedPathname = trimmedPathname.split(`#`).slice(0, -1).join(``);
   } // Remove search query
 
+
   if (trimmedPathname.split(`?`).length > 1) {
-    trimmedPathname = trimmedPathname
-      .split(`?`)
-      .slice(0, -1)
-      .join(``);
+    trimmedPathname = trimmedPathname.split(`?`).slice(0, -1).join(``);
   }
 
   if (cleanAndFindPathCache[trimmedPathname]) {
@@ -106,20 +104,19 @@ const cachedFetch = (resourceName, fetchFn) => {
   });
 };
 
-const doFetch = (url, method = `GET`) =>
-  new Promise((resolve, reject) => {
-    const req = new XMLHttpRequest();
-    req.open(method, url, true);
-    req.withCredentials = true;
+const doFetch = (url, method = `GET`) => new Promise((resolve, reject) => {
+  const req = new XMLHttpRequest();
+  req.open(method, url, true);
+  req.withCredentials = true;
 
-    req.onreadystatechange = () => {
-      if (req.readyState == 4) {
-        resolve(req);
-      }
-    };
+  req.onreadystatechange = () => {
+    if (req.readyState == 4) {
+      resolve(req);
+    }
+  };
 
-    req.send(null);
-  });
+  req.send(null);
+});
 
 const handlePageDataResponse = (path, req) => {
   fetchedPageData[path] = true;
@@ -154,15 +151,10 @@ const handlePageDataResponse = (path, req) => {
 
 const fetchPageData = path => {
   const url = createPageDataUrl(path);
-  return cachedFetch(url, doFetch).then(req =>
-    handlePageDataResponse(path, req)
-  );
+  return cachedFetch(url, doFetch).then(req => handlePageDataResponse(path, req));
 };
 
-const createComponentUrls = componentChunkName =>
-  window.___chunkMapping[componentChunkName].map(
-    chunk => __PATH_PREFIX__ + chunk
-  );
+const createComponentUrls = componentChunkName => window.___chunkMapping[componentChunkName].map(chunk => __PATH_PREFIX__ + chunk);
 
 const fetchComponent = chunkName => asyncRequires.components[chunkName]();
 
@@ -189,6 +181,7 @@ const onPrefetchPathname = pathname => {
 // we load all resources for likely-to-be-visited paths.
 // let pathArray = []
 // let pathCount = {}
+
 
 let pathScriptsCache = {};
 let prefetchTriggered = {};
@@ -233,8 +226,7 @@ const queue = {
   // pathname.
   hovering: path => queue.loadPage(path),
   enqueue: rawPath => {
-    if (!apiRunner)
-      console.error(`Run setApiRunnerForLoader() before enqueing paths`); // Skip prefetching if we know user is on slow or constrained connection
+    if (!apiRunner) console.error(`Run setApiRunnerForLoader() before enqueing paths`); // Skip prefetching if we know user is on slow or constrained connection
 
     if (`connection` in navigator) {
       if ((navigator.connection.effectiveType || ``).includes(`2g`)) {
@@ -247,11 +239,13 @@ const queue = {
     } // Tell plugins with custom prefetching logic that they should start
     // prefetching this path.
 
+
     onPrefetchPathname(rawPath); // If a plugin has disabled core prefetching, stop now.
 
     if (disableCorePrefetching.some(a => a)) {
       return false;
     } // Check if the page exists.
+
 
     let realPath = cleanAndFindPath(rawPath);
 
@@ -259,33 +253,27 @@ const queue = {
       return true;
     }
 
-    if (
-      process.env.NODE_ENV !== `production` &&
-      process.env.NODE_ENV !== `test`
-    ) {
+    if (process.env.NODE_ENV !== `production` && process.env.NODE_ENV !== `test`) {
       // Ensure latest version of page data is in the JSON store
       devGetPageData(realPath);
     }
 
     if (process.env.NODE_ENV === `production`) {
       const pageDataUrl = createPageDataUrl(realPath);
-      (0, _prefetch.default)(pageDataUrl)
-        .then(() =>
-          // This was just prefetched, so will return a response from
-          // the cache instead of making another request to the server
-          fetchPageData(realPath)
-        )
-        .then(pageData => {
-          if (pageData === null) {
-            return Promise.resolve();
-          } // Tell plugins the path has been successfully prefetched
+      (0, _prefetch.default)(pageDataUrl).then(() => // This was just prefetched, so will return a response from
+      // the cache instead of making another request to the server
+      fetchPageData(realPath)).then(pageData => {
+        if (pageData === null) {
+          return Promise.resolve();
+        } // Tell plugins the path has been successfully prefetched
 
-          const chunkName = pageData.componentChunkName;
-          const componentUrls = createComponentUrls(chunkName);
-          return Promise.all(componentUrls.map(_prefetch.default)).then(() => {
-            onPostPrefetchPathname(rawPath);
-          });
+
+        const chunkName = pageData.componentChunkName;
+        const componentUrls = createComponentUrls(chunkName);
+        return Promise.all(componentUrls.map(_prefetch.default)).then(() => {
+          onPostPrefetchPathname(rawPath);
         });
+      });
     }
 
     return true;
@@ -310,63 +298,47 @@ const queue = {
 
     return Promise.resolve(pageDatas[realPath]);
   },
-  loadPage: rawPath =>
-    queue
-      .loadPageData(rawPath)
-      .then(pageData => {
-        // If no page was found, then preload the 404.html
-        if (pageData === null && rawPath !== `/404.html`) {
-          return Promise.all([
-            queue.doesPageHtmlExist(rawPath),
-            queue.loadPage(`/404.html`)
-          ]).then(() => null);
-        } // Otherwise go ahead and load the page's component
+  loadPage: rawPath => queue.loadPageData(rawPath).then(pageData => {
+    // If no page was found, then preload the 404.html
+    if (pageData === null && rawPath !== `/404.html`) {
+      return Promise.all([queue.doesPageHtmlExist(rawPath), queue.loadPage(`/404.html`)]).then(() => null);
+    } // Otherwise go ahead and load the page's component
 
-        return loadComponent(pageData.componentChunkName).then(component => {
-          const page = {
-            componentChunkName: pageData.componentChunkName,
-            path: pageData.path,
-            webpackCompilationHash: pageData.webpackCompilationHash
-          };
-          const jsonData = pageData.result;
-          const pageResources = {
-            component,
-            json: jsonData,
-            page
-          };
-          pathScriptsCache[cleanAndFindPath(rawPath)] = pageResources;
 
-          _emitter.default.emit(`onPostLoadPageResources`, {
-            page: pageResources,
-            pageResources
-          });
+    return loadComponent(pageData.componentChunkName).then(component => {
+      const page = {
+        componentChunkName: pageData.componentChunkName,
+        path: pageData.path,
+        webpackCompilationHash: pageData.webpackCompilationHash
+      };
+      const jsonData = pageData.result;
+      const pageResources = {
+        component,
+        json: jsonData,
+        page
+      };
+      pathScriptsCache[cleanAndFindPath(rawPath)] = pageResources;
 
-          if (process.env.NODE_ENV === `production`) {
-            onPostPrefetchPathname(rawPath);
-          }
+      _emitter.default.emit(`onPostLoadPageResources`, {
+        page: pageResources,
+        pageResources
+      });
 
-          return pageResources;
-        });
-      })
-      .catch(() => null),
-  loadPageOr404: rawPath =>
-    queue
-      .loadPage(rawPath)
-      .then(result =>
-        result === null && rawPath !== `/404.html`
-          ? queue.loadPageSync(`/404.html`)
-          : null
-      ),
+      if (process.env.NODE_ENV === `production`) {
+        onPostPrefetchPathname(rawPath);
+      }
+
+      return pageResources;
+    });
+  }).catch(() => null),
+  loadPageOr404: rawPath => queue.loadPage(rawPath).then(result => result === null && rawPath !== `/404.html` ? queue.loadPageSync(`/404.html`) : null),
   loadPageSync: rawPath => pathScriptsCache[cleanAndFindPath(rawPath)],
   getResourceURLsForPathname: rawPath => {
     const path = cleanAndFindPath(rawPath);
     const pageData = pageDatas[path];
 
     if (pageData) {
-      return [
-        ...createComponentUrls(pageData.componentChunkName),
-        createPageDataUrl(path)
-      ];
+      return [...createComponentUrls(pageData.componentChunkName), createPageDataUrl(path)];
     } else {
       return null;
     }
@@ -382,15 +354,12 @@ const queue = {
       pageHtmlExistsResults[path] = req.status === 200;
     });
   },
-  doesPageHtmlExistSync: rawPath =>
-    pageHtmlExistsResults[cleanAndFindPath(rawPath)],
+  doesPageHtmlExistSync: rawPath => pageHtmlExistsResults[cleanAndFindPath(rawPath)],
   findMatchPath
 };
 
 const postInitialRenderWork = () => {
-  console.warn(
-    `Warning: postInitialRenderWork is deprecated. It is now a noop`
-  );
+  console.warn(`Warning: postInitialRenderWork is deprecated. It is now a noop`);
 };
 
 exports.postInitialRenderWork = postInitialRenderWork;
@@ -406,15 +375,11 @@ const publicLoader = {
   // core gatsby and the offline plugin, however there's a very small
   // chance they're called by others.
   getResourcesForPathname: rawPath => {
-    console.warn(
-      `Warning: getResourcesForPathname is deprecated. Use loadPage instead`
-    );
+    console.warn(`Warning: getResourcesForPathname is deprecated. Use loadPage instead`);
     return queue.loadPage(rawPath);
   },
   getResourcesForPathnameSync: rawPath => {
-    console.warn(
-      `Warning: getResourcesForPathnameSync is deprecated. Use loadPageSync instead`
-    );
+    console.warn(`Warning: getResourcesForPathnameSync is deprecated. Use loadPageSync instead`);
     return queue.loadPageSync(rawPath);
   },
   // Real methods

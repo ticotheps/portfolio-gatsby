@@ -1,44 +1,44 @@
-import { apiRunner, apiRunnerAsync } from "./api-runner-browser";
-import React, { createElement } from "react";
-import ReactDOM from "react-dom";
-import { Router, navigate } from "@reach/router";
-import { ScrollContext } from "gatsby-react-router-scroll";
-import domReady from "@mikaelkristiansson/domready";
+import { apiRunner, apiRunnerAsync } from "./api-runner-browser"
+import React, { createElement } from "react"
+import ReactDOM from "react-dom"
+import { Router, navigate } from "@reach/router"
+import { ScrollContext } from "gatsby-react-router-scroll"
+import domReady from "@mikaelkristiansson/domready"
 import {
   shouldUpdateScroll,
   init as navigationInit,
-  RouteUpdates
-} from "./navigation";
-import emitter from "./emitter";
-import PageRenderer from "./page-renderer";
-import asyncRequires from "./async-requires";
-import matchPaths from "./match-paths.json";
-import loader, { setApiRunnerForLoader } from "./loader";
-import EnsureResources from "./ensure-resources";
-import stripPrefix from "./strip-prefix";
+  RouteUpdates,
+} from "./navigation"
+import emitter from "./emitter"
+import PageRenderer from "./page-renderer"
+import asyncRequires from "./async-requires"
+import matchPaths from "./match-paths.json"
+import loader, { setApiRunnerForLoader } from "./loader"
+import EnsureResources from "./ensure-resources"
+import stripPrefix from "./strip-prefix"
 
-window.asyncRequires = asyncRequires;
-window.___emitter = emitter;
-window.___loader = loader;
-window.___webpackCompilationHash = window.webpackCompilationHash;
+window.asyncRequires = asyncRequires
+window.___emitter = emitter
+window.___loader = loader
+window.___webpackCompilationHash = window.webpackCompilationHash
 
-loader.addProdRequires(asyncRequires);
-loader.addMatchPaths(matchPaths);
-setApiRunnerForLoader(apiRunner);
+loader.addProdRequires(asyncRequires)
+loader.addMatchPaths(matchPaths)
+setApiRunnerForLoader(apiRunner)
 
-navigationInit();
+navigationInit()
 
 // Let the site/plugins run code very early.
 apiRunnerAsync(`onClientEntry`).then(() => {
   // Let plugins register a service worker. The plugin just needs
   // to return true.
   if (apiRunner(`registerServiceWorker`).length > 0) {
-    require(`./register-service-worker`);
+    require(`./register-service-worker`)
   }
 
   class RouteHandler extends React.Component {
     render() {
-      let { location } = this.props;
+      let { location } = this.props
 
       return (
         <EnsureResources location={location}>
@@ -58,11 +58,11 @@ apiRunnerAsync(`onClientEntry`).then(() => {
             </RouteUpdates>
           )}
         </EnsureResources>
-      );
+      )
     }
   }
 
-  const { pagePath, location: browserLoc } = window;
+  const { pagePath, location: browserLoc } = window
 
   // Explicitly call navigate if the canonical path (window.pagePath)
   // is different to the browser path (window.location.pathname). But
@@ -82,8 +82,8 @@ apiRunnerAsync(`onClientEntry`).then(() => {
     )
   ) {
     navigate(__BASE_PATH__ + pagePath + browserLoc.search + browserLoc.hash, {
-      replace: true
-    });
+      replace: true,
+    })
   }
 
   loader.loadPage(browserLoc.pathname).then(() => {
@@ -91,27 +91,27 @@ apiRunnerAsync(`onClientEntry`).then(() => {
       createElement(
         Router,
         {
-          basepath: __BASE_PATH__
+          basepath: __BASE_PATH__,
         },
         createElement(RouteHandler, { path: `/*` })
-      );
+      )
 
     const WrappedRoot = apiRunner(
       `wrapRootElement`,
       { element: <Root /> },
       <Root />,
       ({ result }) => {
-        return { element: result };
+        return { element: result }
       }
-    ).pop();
+    ).pop()
 
-    let NewRoot = () => WrappedRoot;
+    let NewRoot = () => WrappedRoot
 
     const renderer = apiRunner(
       `replaceHydrateFunction`,
       undefined,
       ReactDOM.hydrate
-    )[0];
+    )[0]
 
     domReady(() => {
       renderer(
@@ -120,9 +120,9 @@ apiRunnerAsync(`onClientEntry`).then(() => {
           ? document.getElementById(`___gatsby`)
           : void 0,
         () => {
-          apiRunner(`onInitialClientRender`);
+          apiRunner(`onInitialClientRender`)
         }
-      );
-    });
-  });
-});
+      )
+    })
+  })
+})

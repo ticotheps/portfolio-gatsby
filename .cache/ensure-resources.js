@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import loader from "./loader";
-import shallowCompare from "shallow-compare";
+import React from "react"
+import PropTypes from "prop-types"
+import loader from "./loader"
+import shallowCompare from "shallow-compare"
 
-let isInitialRender = true;
+let isInitialRender = true
 
 // ensure-resources.js is the top-level component called by the
 // Router. It is therefore rendered on every page navigation. It's job
@@ -45,16 +45,16 @@ let isInitialRender = true;
 // ot the pure 404 HTML page.
 class EnsureResources extends React.Component {
   constructor(props) {
-    super();
-    let location = props.location;
-    let pageResources = loader.loadPageSync(location.pathname);
+    super()
+    let location = props.location
+    let pageResources = loader.loadPageSync(location.pathname)
     if (!pageResources && !loader.doesPageHtmlExistSync(location.pathname)) {
-      pageResources = loader.loadPageSync(`/404.html`);
+      pageResources = loader.loadPageSync(`/404.html`)
     }
     this.state = {
       location: { ...location },
-      pageResources
-    };
+      pageResources,
+    }
   }
 
   reloadPage(prevHref) {
@@ -63,47 +63,47 @@ class EnsureResources extends React.Component {
     // back, the browser will just change the URL and expect JS to handle
     // the change, which won't always work since it might not be a Gatsby
     // page.
-    const { href } = window.location;
-    window.history.replaceState({}, ``, prevHref);
-    window.location.replace(href);
+    const { href } = window.location
+    window.history.replaceState({}, ``, prevHref)
+    window.location.replace(href)
   }
 
   static getDerivedStateFromProps({ location }, prevState) {
     if (prevState.location.href !== location.href) {
-      const pageResources = loader.loadPageSync(location.pathname);
+      const pageResources = loader.loadPageSync(location.pathname)
 
       return {
         pageResources,
-        location: { ...location }
-      };
+        location: { ...location },
+      }
     }
 
-    return null;
+    return null
   }
 
   hasResources(pageResources) {
     if (pageResources && pageResources.json) {
-      return true;
+      return true
     }
 
     if (pageResources && process.env.NODE_ENV !== `production`) {
-      return true;
+      return true
     }
 
-    return false;
+    return false
   }
 
   retryResources(nextProps) {
-    const { pathname } = nextProps.location;
+    const { pathname } = nextProps.location
 
     if (!loader.loadPageSync(pathname)) {
       // Store the previous and next location before resolving resources
-      const prevLocation = this.props.location;
-      this.nextLocation = nextProps.location;
+      const prevLocation = this.props.location
+      this.nextLocation = nextProps.location
 
       if (loader.doesPageHtmlExistSync(pathname)) {
-        this.reloadPage(prevLocation.href);
-        return;
+        this.reloadPage(prevLocation.href)
+        return
       }
 
       // If we can't find the page resources, or its HTML, then this
@@ -111,44 +111,44 @@ class EnsureResources extends React.Component {
       loader.loadPageOr404(pathname).then(pageResources => {
         // The page may have changed since we started this, in which case doesn't update
         if (this.nextLocation !== nextProps.location) {
-          return;
+          return
         }
 
         if (this.hasResources(pageResources)) {
           this.setState({
             location: { ...window.location },
-            pageResources
-          });
-          return;
+            pageResources,
+          })
+          return
         }
 
         // If we still don't have resources, reload the page.
         // (This won't happen on initial render, since shouldComponentUpdate
         // is only called when the component updates.)
-        this.reloadPage(prevLocation.href);
-      });
+        this.reloadPage(prevLocation.href)
+      })
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     // Always return false if we're missing resources.
     if (!this.hasResources(nextState.pageResources)) {
-      this.retryResources(nextProps);
-      return false;
+      this.retryResources(nextProps)
+      return false
     }
 
     // Check if the component or json have changed.
     if (this.state.pageResources !== nextState.pageResources) {
-      return true;
+      return true
     }
     if (
       this.state.pageResources.component !== nextState.pageResources.component
     ) {
-      return true;
+      return true
     }
 
     if (this.state.pageResources.json !== nextState.pageResources.json) {
-      return true;
+      return true
     }
 
     // Check if location has changed on a page using internal routing
@@ -159,28 +159,28 @@ class EnsureResources extends React.Component {
       (nextState.pageResources.page.matchPath ||
         nextState.pageResources.page.path)
     ) {
-      return true;
+      return true
     }
 
-    return shallowCompare(this, nextProps, nextState);
+    return shallowCompare(this, nextProps, nextState)
   }
 
   render() {
     if (!this.hasResources(this.state.pageResources) && isInitialRender) {
-      window.___failedResources = true;
+      window.___failedResources = true
 
       // prevent hydrating
-      throw new Error(`Missing resources for ${this.state.location.pathname}`);
+      throw new Error(`Missing resources for ${this.state.location.pathname}`)
     }
 
-    isInitialRender = false;
-    return this.props.children(this.state);
+    isInitialRender = false
+    return this.props.children(this.state)
   }
 }
 
 EnsureResources.propTypes = {
   location: PropTypes.object.isRequired,
-  pageResources: PropTypes.object
-};
+  pageResources: PropTypes.object,
+}
 
-export default EnsureResources;
+export default EnsureResources

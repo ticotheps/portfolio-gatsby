@@ -7,9 +7,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _extends2 = _interopRequireDefault(
-  require("@babel/runtime/helpers/extends")
-);
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -45,6 +43,7 @@ if (window.__webpack_hot_middleware_reporter__ !== undefined) {
     clear() {
       (0, _errorOverlayHandler.clearError)(overlayErrorID);
     }
+
   });
 }
 
@@ -52,33 +51,19 @@ if (window.__webpack_hot_middleware_reporter__ !== undefined) {
 
 class RouteHandler extends _react.default.Component {
   render() {
-    let { location } = this.props;
+    let {
+      location
+    } = this.props;
 
     if (!_loader.default.isPageNotFound(location.pathname)) {
-      return _react.default.createElement(
-        _ensureResources.default,
-        {
-          location: location
-        },
-        locationAndPageResources =>
-          _react.default.createElement(
-            _navigation.RouteUpdates,
-            {
-              location: location
-            },
-            _react.default.createElement(
-              _gatsbyReactRouterScroll.ScrollContext,
-              {
-                location: location,
-                shouldUpdateScroll: _navigation.shouldUpdateScroll
-              },
-              _react.default.createElement(
-                _jsonStore.default,
-                (0, _extends2.default)({}, this.props, locationAndPageResources)
-              )
-            )
-          )
-      );
+      return _react.default.createElement(_ensureResources.default, {
+        location: location
+      }, locationAndPageResources => _react.default.createElement(_navigation.RouteUpdates, {
+        location: location
+      }, _react.default.createElement(_gatsbyReactRouterScroll.ScrollContext, {
+        location: location,
+        shouldUpdateScroll: _navigation.shouldUpdateScroll
+      }, _react.default.createElement(_jsonStore.default, (0, _extends2.default)({}, this.props, locationAndPageResources)))));
     }
 
     const dev404PageResources = _loader.default.loadPageSync(`/dev-404-page`);
@@ -88,51 +73,39 @@ class RouteHandler extends _react.default.Component {
     let custom404;
 
     if (real404PageResources) {
-      custom404 = _react.default.createElement(
-        _jsonStore.default,
-        (0, _extends2.default)({}, this.props, {
-          pageResources: real404PageResources
-        })
-      );
+      custom404 = _react.default.createElement(_jsonStore.default, (0, _extends2.default)({}, this.props, {
+        pageResources: real404PageResources
+      }));
     }
 
-    return _react.default.createElement(
-      _navigation.RouteUpdates,
-      {
-        location: location
-      },
-      _react.default.createElement(_jsonStore.default, {
-        location: location,
-        pageResources: dev404PageResources,
-        custom404: custom404
-      })
-    );
+    return _react.default.createElement(_navigation.RouteUpdates, {
+      location: location
+    }, _react.default.createElement(_jsonStore.default, {
+      location: location,
+      pageResources: dev404PageResources,
+      custom404: custom404
+    }));
   }
+
 }
 
-const Root = () =>
-  (0, _react.createElement)(
-    _router.Router,
-    {
-      basepath: __BASE_PATH__
-    },
-    (0, _react.createElement)(RouteHandler, {
-      path: `/*`
-    })
-  ); // Let site, plugins wrap the site e.g. for Redux.
+const Root = () => (0, _react.createElement)(_router.Router, {
+  basepath: __BASE_PATH__
+}, (0, _react.createElement)(RouteHandler, {
+  path: `/*`
+})); // Let site, plugins wrap the site e.g. for Redux.
 
-const WrappedRoot = (0, _apiRunnerBrowser.apiRunner)(
-  `wrapRootElement`,
-  {
-    element: _react.default.createElement(Root, null)
-  },
-  _react.default.createElement(Root, null),
-  ({ result, plugin }) => {
-    return {
-      element: result
-    };
-  }
-).pop();
+
+const WrappedRoot = (0, _apiRunnerBrowser.apiRunner)(`wrapRootElement`, {
+  element: _react.default.createElement(Root, null)
+}, _react.default.createElement(Root, null), ({
+  result,
+  plugin
+}) => {
+  return {
+    element: result
+  };
+}).pop();
 
 var _default = () => WrappedRoot;
 
