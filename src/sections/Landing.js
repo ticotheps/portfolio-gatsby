@@ -152,9 +152,9 @@ const LandingPage = () => (
               textAlign='center'
               style={centerHorizontally}
             >
-              <TextLoop interval={2500}>
+              <TextLoop interval={2200}>
                 {roles
-                  .sort(() => Math.random() - 0.5)
+                  // .sort(() => Math.random() - 0.5)
                   .map(text => (
                     <Text width={[300, 500]} key={text}>
                       {text}
