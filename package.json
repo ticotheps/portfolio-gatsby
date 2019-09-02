@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/EmaSuriano/gatsby-starter-mate#readme",
   "dependencies": {
+    "babel-plugin-styled-components": "^1.10.6",
     "contentful": "^7.0.3",
     "dotenv": "^7.0.0",
     "envfile": "^3.0.0",
@@ -68,7 +69,6 @@
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.12.3",
-    "husky": "^3.0.5",
     "lint-staged": "^8.1.0",
     "prettier": "^1.18.2"
   },
