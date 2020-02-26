@@ -43,6 +43,7 @@ bin/published.js
 test/**/public
 .gatsby-context.js
 .DS_Store
+<<<<<<< HEAD
 public/
 node_modules/
 .cache/
@@ -66,3 +67,9 @@ node_modules/
 !themes/gatsby-starter-notes-theme/package-lock.json
 !themes/gatsby-starter-theme/package-lock.json
 !themes/gatsby-starter-theme-workspace/package-lock.json
+||||||| 2c091404
+.vscode/
+=======
+.vscode/
+node_modules
+>>>>>>> e5749aca4c504fce1c5e4180dd0a2ccaece38543
