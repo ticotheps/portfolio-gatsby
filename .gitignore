@@ -43,33 +43,5 @@ bin/published.js
 test/**/public
 .gatsby-context.js
 .DS_Store
-<<<<<<< HEAD
-public/
-node_modules/
-.cache/
-.netlify
-
-# IDE specific
-.idea/
-.vscode/
-*.sw*
-
-# misc
-.serverless/
-
-# lock files
-# yarn.lock
-# package-lock.json
-
-# starters are special; we want to persist the lock files
-!starters/*/package-lock.json
-!themes/gatsby-starter-blog-theme/package-lock.json
-!themes/gatsby-starter-notes-theme/package-lock.json
-!themes/gatsby-starter-theme/package-lock.json
-!themes/gatsby-starter-theme-workspace/package-lock.json
-||||||| 2c091404
-.vscode/
-=======
 .vscode/
 node_modules
->>>>>>> e5749aca4c504fce1c5e4180dd0a2ccaece38543
