@@ -68,3 +68,4 @@ public/
 # mac FS
 .DS_Store
 .vscode/
+node_modules
